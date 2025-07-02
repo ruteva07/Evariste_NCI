@@ -1,19 +1,12 @@
 #THIS SCRIPT WAS DEVELOPED BY EVARISTE RUTEBUKA -NATURAL CAPITAL INSIGHTS, FOR NATURAL CAPITAL ACCOUNTING (NCA) PROJECTS OF ETHIOPIA, JUNE 2025 
-##This script suite supports the transformation of InVEST model outputs into formats suitable for use in Natural Capital Accounting (NCA) 
+# This script suite supports the transformation of InVEST model outputs into formats suitable for use in Natural Capital Accounting (NCA) 
 # frameworks, specifically aligned with the System of Environmental-Economic Accounting – Ecosystem Accounting (SEEA EA) standards.
-#To transform outputs from InVEST ecosystem service models—namely SDR, SWY, and Carbon Storage—into spatially explicit, 
-# additions and reductions, avoided quickflows and others physically meaningful metrics (e.g., tonnes or cubic meters per pixel), 
+# This script focuses on InVEST ecosystem service models—namely SDR, SWY, and Carbon Storage, plus some transformations needed for SEEA account tables 
+# such as additions and reductions, avoided quickflow into meaningful metrics (e.g., tonnes or cubic meters per pixel), 
 # and summarize them in ways that are directly usable for SEEA EA ecosystem service supply tables and condition accounts.
 #%%
-# -------------------------------
-# 1. PER-PIXEL UNIT CONVERSION MODULES
-# -------------------------------
 
-# -------------------------------
-# === A.Python Script: Convert SDR Rasters to Tonnes per Pixel when  SDR are from InVEST 3.16 version ===
-# -------------------------------
-# This script processes SDR rasters to convert values to tonnes per pixel
-
+#IMPORT PACKAGES
 import rasterio
 import rasterio.mask
 import numpy as np
@@ -26,7 +19,17 @@ from tqdm import tqdm
 import time
 import warnings
 #%%
-# Define input and outputs as same folder (where your SDR outputs rasters are stored)
+# -------------------------------
+# 1. PER-PIXEL UNIT CONVERSION MODULES
+# -------------------------------
+
+# -------------------------------
+# === A.Python Script: Convert SDR Rasters to Tonnes per Pixel when  SDR model is based on InVEST 3.16 version ===
+# -------------------------------
+# This script processes SDR rasters to convert values to tonnes per pixel
+
+
+# Define input and outputs in the same folder (where your SDR outputs rasters are stored)
 input_folder = Path("/SDR_Ouputs")
 # Conversion factor for 90m x 90m pixel (0.81 hectares) //This is 90m is related to the DEM resolution
 conversion_factor = 0.81
@@ -428,15 +431,15 @@ print(f"✅ Finished at: {end.strftime('%Y-%m-%d %H:%M:%S')}")
 print(f"⏱️ Total elapsed time: {elapsed}")
 
 #%%
-# Python Script: Zonal Statistics for Ecosystem Services by Watershed or province
+# Python Script: Zonal Statistics for Ecosystem Services by Watershed or Province
 # This script processes raster data to calculate zonal statistics for ecosystem services by watershed
 # It reads watershed boundaries from a GeoPackage, processes multiple raster files, and outputs results to a CSV file.
 # %%
 
 
-gpkg_path = Path(r"/Watershed.gpkg")  # or Province.gpkg
-raster_folder = Path(r"/SDR_SWY_CARBON_Outputs_PerPixel_YearY")
-output_csv = Path(r"/EcosServices_sum_by_watershed.csv")
+gpkg_path = Path("/Watershed.gpkg")  # or Province.gpkg
+raster_folder = Path("/SDR_SWY_CARBON_Outputs_PerPixel_YearY")
+output_csv = Path("/EcosServices_sum_by_watershed.csv")
 
 # --- LOAD VECTOR ---
 watersheds = gpd.read_file(gpkg_path)
