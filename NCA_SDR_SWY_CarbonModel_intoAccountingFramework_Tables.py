@@ -15,9 +15,17 @@
 # This script processes SDR rasters to convert values to tonnes per pixel
 
 import rasterio
-from rasterio.windows import Window
-from pathlib import Path
+import rasterio.mask
 import numpy as np
+import pandas as pd
+import geopandas as gpd
+from pathlib import Path
+from shapely.geometry import mapping
+from datetime import datetime
+from tqdm import tqdm
+import time
+import warnings
+#%%
 # Define input and outputs as same folder (where your SDR outputs rasters are stored)
 input_folder = Path("/SDR_Ouputs")
 # Conversion factor for 90m x 90m pixel (0.81 hectares) //This is 90m is related to the DEM resolution
@@ -157,12 +165,6 @@ for input_path in input_folder.glob("*.tif"):
 # # === A. Python Script: Zonal statistics for SDR, SWY and Carbon Model Outputs by LULC I=(ECosystem type)
 # -------------------------------
 # This batch LULC Zonal Summary with Low RAM Usage (Windowed Reading)
-import rasterio
-import time
-import numpy as np
-import pandas as pd
-from pathlib import Path
-from collections import defaultdict
 #%%
 # ✅ Start timer
 start_time = time.time()
@@ -258,11 +260,7 @@ print(f"🕒 Total run time: {minutes} minutes and {seconds} seconds")
 # This script processes carbon storage rasters to compute additions and reductions based on LULC changes
 # Efficient Block-Wise Raster Processing with Compression
 # This script processes carbon storage rasters to compute additions and reductions based on LULC changes
-import rasterio
-import numpy as np
-from pathlib import Path
-from datetime import datetime
-from tqdm import tqdm  # 🟢 Progress bar
+
 #%%
 # Timestamp: Start
 start_time = datetime.now()
@@ -321,17 +319,9 @@ print(f"⏱️ Total processing time: {elapsed}")
 
 # %%
 
-## Dealing with Avoided Quick Flow concept for flooding reduction
+## Dealing with the Avoided Quick Flow concept for flooding reduction
 # %%
-# %% Dealing with Avoided Quick Flow concept for flood reduction
-import rasterio
-import numpy as np
-import pandas as pd
-from pathlib import Path
-from tqdm import tqdm
-from datetime import datetime
-#%%
-# -------------------------------
+# %% Dealing with the Avoided Quick Flow concept for flood reduction
 # Python Script: Calculate Avoided Quick Flow (QF) for Flood Reduction
 
 # This script calculates the avoided Quick Flow (QF) for flood reduction based on LULC changes  
@@ -442,15 +432,7 @@ print(f"⏱️ Total elapsed time: {elapsed}")
 # This script processes raster data to calculate zonal statistics for ecosystem services by watershed
 # It reads watershed boundaries from a GeoPackage, processes multiple raster files, and outputs results to a CSV file.
 # %%
-import geopandas as gpd
-import rasterio
-import rasterio.mask
-import numpy as np
-import pandas as pd
-from pathlib import Path
-from shapely.geometry import mapping
-import time
-import warnings
+
 
 gpkg_path = Path(r"/Watershed.gpkg")  # or Province.gpkg
 raster_folder = Path(r"/SDR_SWY_CARBON_Outputs_PerPixel_YearY")
