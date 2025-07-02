@@ -1,4 +1,4 @@
-#THIS SCRIPT WAS DEVELOPED BY EVARISTE RUTEBUKA -NATURAL CAPITAL INSIGHTS, FOR NATURAL CAPITAL ACCOUNTING (NCA) PROJECTS OF ETHIPIA  JUNE 2025 
+#THIS SCRIPT WAS DEVELOPED BY EVARISTE RUTEBUKA -NATURAL CAPITAL INSIGHTS, FOR NATURAL CAPITAL ACCOUNTING (NCA) PROJECTS OF ETHIOPIA, JUNE 2025 
 ##This script suite supports the transformation of InVEST model outputs into formats suitable for use in Natural Capital Accounting (NCA) 
 # frameworks, specifically aligned with the System of Environmental-Economic Accounting – Ecosystem Accounting (SEEA EA) standards.
 #To transform outputs from InVEST ecosystem service models—namely SDR, SWY, and Carbon Storage—into spatially explicit, 
